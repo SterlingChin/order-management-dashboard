@@ -1,0 +1,180 @@
+openapi: 3.0.0
+info:
+  title: Customer Orders API
+  version: '1.0'
+  description: API for managing customer orders
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /orders:
+    get:
+      summary: List all orders
+      description: Retrieve a list of customer orders
+      operationId: listOrders
+      responses:
+        '200':
+          description: Successfully retrieved orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+              examples:
+                recent_orders:
+                  summary: Recent orders example
+                  value:
+                    - order_id: "ORD-001"
+                      customer_name: "John Smith"
+                      quantity: 3
+                      order_date: "2023-11-22T10:30:00Z"
+                      status: 
+                        is_pending: false
+                        is_processing: false
+                        is_shipped: false
+                        is_delivered: true
+                      ship_to: "123 Main St, Denver CO 80202"
+                      total_amount: 149.99
+                    - order_id: "ORD-002"
+                      customer_name: "Jane Doe"
+                      quantity: 1
+                      order_date: "2023-11-21T15:45:00Z"
+                      status:
+                        is_pending: false
+                        is_processing: true
+                        is_shipped: false
+                        is_delivered: false
+                      ship_to: "456 Oak Ave, Seattle WA 98101"
+                      total_amount: 49.99
+                pending_orders:
+                  summary: Pending orders example
+                  value:
+                    - order_id: "ORD-003"
+                      customer_name: "Bob Wilson"
+                      quantity: 2
+                      order_date: "2023-11-22T09:15:00Z"
+                      status:
+                        is_pending: true
+                        is_processing: false
+                        is_shipped: false
+                        is_delivered: false
+                      ship_to: "789 Pine St, Austin TX 78701"
+                      total_amount: 99.99
+                    - order_id: "ORD-004"
+                      customer_name: "Sarah Johnson"
+                      quantity: 5
+                      order_date: "2023-11-22T14:20:00Z"
+                      status:
+                        is_pending: true
+                        is_processing: false
+                        is_shipped: false
+                        is_delivered: false
+                      ship_to: "321 Maple Dr, Portland OR 97201"
+                      total_amount: 249.99
+                shipped_orders:
+                  summary: Shipped orders example
+                  value:
+                    - order_id: "ORD-005"
+                      customer_name: "Mike Brown"
+                      quantity: 1
+                      order_date: "2023-11-21T11:30:00Z"
+                      status:
+                        is_pending: false
+                        is_processing: false
+                        is_shipped: true
+                        is_delivered: false
+                      ship_to: "567 Elm St, Chicago IL 60601"
+                      total_amount: 79.99
+                    - order_id: "ORD-006"
+                      customer_name: "Emma Davis"
+                      quantity: 3
+                      order_date: "2023-11-21T16:45:00Z"
+                      status:
+                        is_pending: false
+                        is_processing: false
+                        is_shipped: true
+                        is_delivered: false
+                      ship_to: "890 Beach Blvd, San Diego CA 92101"
+                      total_amount: 159.99
+                processing_orders:
+                  summary: Processing orders example
+                  value:
+                    - order_id: "ORD-007"
+                      customer_name: "Tom Wilson"
+                      quantity: 4
+                      order_date: "2023-11-22T08:15:00Z"
+                      status:
+                        is_pending: false
+                        is_processing: true
+                        is_shipped: false
+                        is_delivered: false
+                      ship_to: "432 Park Ave, New York NY 10022"
+                      total_amount: 199.99
+  /orders/{order_id}:
+    get:
+      summary: Get order by ID
+      description: Retrieve a specific order by its ID
+      operationId: getOrder
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                single_order:
+                  summary: Single order example
+                  value:
+                    order_id: "ORD-001"
+                    customer_name: "John Smith"
+                    quantity: 3
+                    order_date: "2023-11-22T10:30:00Z"
+                    status:
+                      is_pending: false
+                      is_processing: false
+                      is_shipped: false
+                      is_delivered: true
+                    ship_to: "123 Main St, Denver CO 80202"
+                    total_amount: 149.99
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        order_id:
+          type: string
+        customer_name:
+          type: string
+        quantity:
+          type: integer
+        order_date:
+          type: string
+          format: date-time
+        status:
+          type: object
+          properties:
+            is_pending:
+              type: boolean
+            is_processing:
+              type: boolean
+            is_shipped:
+              type: boolean
+            is_delivered:
+              type: boolean
+        ship_to:
+          type: string
+        total_amount:
+          type: number
+      required:
+        - order_id
+        - customer_name
+        - quantity
+        - order_date
+        - status
