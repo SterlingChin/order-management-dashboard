@@ -13,39 +13,39 @@ paths:
             application/json:
               example:
                 orders:
-                  - order_id: "ORD-001"
-                    customer_name: "John Smith"
+                  - orderId: "ORD-001"
+                    customerName: "John Smith"
                     quantity: 3
-                    order_date: "2023-11-22T10:30:00Z"
+                    orderDate: "2023-11-22T10:30:00Z"
                     status:
-                      is_pending: false
-                      is_processing: false
-                      is_shipped: false
-                      is_delivered: true
-                    ship_to: "123 Main St, Denver CO 80202"
-                    total_amount: 149.99
-                  - order_id: "ORD-002"
-                    customer_name: "Jane Doe"
+                      isPending: "false"
+                      isProcessing: "false"
+                      isShipped: "false"
+                      isDelivered: "true"
+                    shipTo: "123 Main St, Denver CO 80202"
+                    totalAmount: 149.99
+                  - orderId: "ORD-002"
+                    customerName: "Jane Doe"
                     quantity: 1
-                    order_date: "2023-11-21T15:45:00Z"
+                    orderDate: "2023-11-21T15:45:00Z"
                     status:
-                      is_pending: false
-                      is_processing: true
-                      is_shipped: false
-                      is_delivered: false
-                    ship_to: "456 Oak Ave, Seattle WA 98101"
-                    total_amount: 49.99
+                      isPending: false
+                      isProcessing: true
+                      isShipped: false
+                      isDelivered: false
+                    shipTo: "456 Oak Ave, Seattle WA 98101"
+                    totalAmount: 49.99
                   - order_id: "ORD-003"
-                    customer_name: "Bob Wilson"
+                    customerName: "Bob Wilson"
                     quantity: 2
-                    order_date: "2023-11-22T09:15:00Z"
+                    orderDate: "2023-11-22T09:15:00Z"
                     status:
-                      is_pending: true
-                      is_processing: false
-                      is_shipped: false
-                      is_delivered: false
-                    ship_to: "789 Pine St, Austin TX 78701"
-                    total_amount: 99.99
+                      isPending: true
+                      isProcessing: false
+                      isShipped: false
+                      isDelivered: false
+                    shipTo: "789 Pine St, Austin TX 78701"
+                    totalAmount: 99.99
   /orders/{order_id}:
     get:
       summary: Get order by ID
@@ -61,14 +61,56 @@ paths:
           content:
             application/json:
               example:
-                order_id: "ORD-001"
-                customer_name: "John Smith"
+                orderId: "ORD-001"
+                customerName: "John Smith"
                 quantity: 3
-                order_date: "2023-11-22T10:30:00Z"
+                orderDate: "2023-11-22T10:30:00Z"
                 status:
-                  is_pending: false
-                  is_processing: false
-                  is_shipped: false
-                  is_delivered: true
-                ship_to: "123 Main St, Denver CO 80202"
-                total_amount: 149.99
+                  isPending: false
+                  isProcessing: false
+                  isShipped: false
+                  isDelivered: true
+                shipTo: "123 Main St, Denver CO 80202"
+                totalAmount: 149.99
+components:
+  schemas:
+    Order:
+      type: object
+      required:
+        - order_id
+        - customer_name
+        - quantity
+        - order_date
+        - status
+        - ship_to
+        - total_amount
+      properties:
+        order_id:
+          type: string
+        customer_name:
+          type: string
+        quantity:
+          type: integer
+        order_date:
+          type: string
+          format: date-time
+        status:
+          type: object
+          properties:
+            is_pending:
+              type: boolean
+            is_processing:
+              type: boolean
+            is_shipped:
+              type: boolean
+            is_delivered:
+              type: boolean
+          required:
+            - is_pending
+            - is_processing
+            - is_shipped
+            - is_delivered
+        ship_to:
+          type: string
+        total_amount:
+          type: number
