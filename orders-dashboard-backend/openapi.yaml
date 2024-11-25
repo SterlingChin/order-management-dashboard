@@ -16,7 +16,7 @@ paths:
                   - orderId: "ORD-001"
                     customerName: "John Smith"
                     quantity: 3
-                    orderDate: "2023-11-22T10:30:00Z"
+                    orderDate: "11/21/23"
                     status:
                       isPending: "false"
                       isProcessing: "false"
@@ -27,7 +27,7 @@ paths:
                   - orderId: "ORD-002"
                     customerName: "Jane Doe"
                     quantity: 1
-                    orderDate: "2023-11-21T15:45:00Z"
+                    orderDate: "11/22/23"
                     status:
                       isPending: false
                       isProcessing: true
@@ -38,7 +38,7 @@ paths:
                   - order_id: "ORD-003"
                     customerName: "Bob Wilson"
                     quantity: 2
-                    orderDate: "2023-11-22T09:15:00Z"
+                    orderDate: "11/23/23"
                     status:
                       isPending: true
                       isProcessing: false
@@ -64,7 +64,7 @@ paths:
                 orderId: "ORD-001"
                 customerName: "John Smith"
                 quantity: 3
-                orderDate: "2023-11-22T10:30:00Z"
+                orderDate: "11/21/23"
                 status:
                   isPending: false
                   isProcessing: false
