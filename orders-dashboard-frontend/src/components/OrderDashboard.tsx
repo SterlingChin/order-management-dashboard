@@ -1,7 +1,7 @@
 // src/components/OrderDashboard.tsx
 import React, { useEffect, useState } from 'react';
 import { orderService } from '../services/orderService';
-import { Order } from '../types/order';
+import { Order } from '../types/orders';
 
 export const OrderDashboard: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -11,7 +11,8 @@ export const OrderDashboard: React.FC = () => {
     const fetchOrders = async () => {
       try {
         const data = await orderService.getOrders();
-        setOrders(data);
+        console.log('API response:', data);
+        setOrders(data.example.orders || []);
       } catch (error) {
         console.error('Failed to fetch orders:', error);
       } finally {
