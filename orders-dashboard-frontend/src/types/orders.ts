@@ -1,10 +1,13 @@
 export interface Order {
-  id: string;
   order_id: string;
   customer_name: string;
   quantity: number;
-  total_amount: number;
-  ship_to: string;
+  items: {
+    item_id: string;
+    name: string;
+    quantity: number;
+    price: number;
+  }[];
   order_date: string;
   status: {
     is_delivered: boolean;
@@ -12,17 +15,16 @@ export interface Order {
     is_processing: boolean;
     is_pending: boolean;
   };
+  ship_to: string;
+  subtotal_amount: number;
+  local_tax: number;
+  total_amount: number;
 }
 
-export interface OrderResponse {
-  example: Order[];
-}
-
-// services/orderService.ts
 export const orderService = {
   getOrders: async (): Promise<Order[]> => {
     const response = await fetch('VITE_API_BASE_URL/orders');
-    const data: OrderResponse = await response.json();
-    return data.example;
+    const data: Order[] = await response.json();
+    return data;
   }
 };
