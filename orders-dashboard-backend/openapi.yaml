@@ -11,14 +11,20 @@ paths:
           description: List of orders
           content:
             application/json:
+              examples:
+                {}
         '400':
           description: Bad Request
           content:
             application/json:
+              examples:
+                {}
         '500':
           description: Internal Server Error
           content:
             application/json:
+              examples:
+                {}
   /orders/{order_id}:
     get:
       summary: Get order by ID
@@ -33,18 +39,26 @@ paths:
           description: Single order
           content:
             application/json:
+              examples:
+                {}
         '400':
           description: Bad Request
           content:
             application/json:
+              examples:
+                {}
         '404':
           description: Not Found
           content:
             application/json:
+              examples:
+                {}
         '500':
           description: Internal Server Error
           content:
             application/json:
+              examples:
+                {}
 components:
   schemas:
     Order:
